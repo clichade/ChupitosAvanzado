@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:padding="10dp"
+        android:orientation="vertical"
+        android:background="@color/rustic">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="tvNombre_Chupito"
+            android:id="@+id/tvNombreChupito"
+            android:fontFamily="cursive"
+            android:textColor="#000"
+            android:textSize="30dp"
+            android:background="@drawable/basic_gradient"/>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:orientation="horizontal"
+            android:background="@drawable/shadow_layer"
+            >
+
+            <ImageView
+                android:layout_width="170dp"
+                android:layout_height="170dp"
+                android:id="@+id/ivphoto"
+                android:src="@mipmap/chupito_basico"
+                />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:id="@+id/tvIngredients"
+                android:textColor="#000"
+                android:text="ingredientes"
+                android:textSize="20dp"/>
+
+        </LinearLayout>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/tvDescription"
+            android:textColor="#000"
+            android:text="descripcion"
+            android:layout_marginTop="10dp"
+            android:textSize="20dp"/>
+
+
+    </LinearLayout>
+
+</RelativeLayout>
