@@ -8,6 +8,9 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
+import com.example.trjano.chupitos.Act_Frags.Chupito_list_fragment;
+import com.example.trjano.chupitos.Act_Frags.Inicio_fragment;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -45,6 +48,7 @@ public class Main_Activity extends AppCompatActivity {
         tabLayout = (TabLayout) findViewById(R.id.tabs);
         tabLayout.setupWithViewPager(viewPager);//unimos el tab con el viewpager
     }
+
 
 
     /**

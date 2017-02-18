@@ -1,8 +1,0 @@
---formato : tipo, nombre, descripcion, ingrediente 1, ingrediente2 ,ingrediente3
-SUAVE#Chupon#cualquier descripción es valida.#chupa#Champa#
-DURO#JaggerLima#Si no lo conoces has desperdiciado tu vida.#Jagger#LimA#
-SUAVE#Fireball#Una bola de fuego en tu puta cara.#Fuego#Pelota de fuego#
-EXOTICO#Revenant#Si ,los bichos del doom.#UAC#Pleasant#
-DURO#Piporro#Si el puto piporro es un chupito, también una persona.#Informática#Un tio pobre#Y mucha dignidad#
-
-

@@ -12,12 +12,16 @@ import android.widget.ArrayAdapter;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 
 /**
  * Created by trjano on 27/01/2017.
  */
-
+/**
+//Este custom adapter adapta el chupito a la forma de una row de fila
+ */
 public class Custom_Adapter extends ArrayAdapter<Chupito> {
     private ArrayList<Chupito> listC;//la lista de chupitos que mostrará
     Context context;//el contexto de la activity de listview
@@ -63,12 +67,19 @@ public class Custom_Adapter extends ArrayAdapter<Chupito> {
             rowData = new RowData();
             rowData.tvTitle = (TextView) row.findViewById(R.id.tvTitle);
             rowData.ivIcon = (ImageView) row.findViewById(R.id.ivIcon);
+            rowData.tvTipo = (TextView) row.findViewById(R.id.tvTipo);
             row.setTag(rowData);
+
+
+        //those lines change the background color of even rows
+        if (position % 2 == 0)
+            row.setBackgroundColor(Color.parseColor("#CD853F"));
 
 
         Chupito chup = listC.get(position);
         rowData.tvTitle.setText(chup.nombre);
         rowData.ivIcon.setImageResource(chup.getIcon());
+        rowData.tvTipo.setText(chup.getTipo().toString());
         return row;
     }
 
@@ -77,5 +88,6 @@ public class Custom_Adapter extends ArrayAdapter<Chupito> {
     {
         ImageView ivIcon;
         TextView tvTitle;
+        TextView tvTipo;
     }
 }

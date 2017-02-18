@@ -1,11 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <color name="colorPrimaryLight">#ffd9b3</color>
     <color name="colorPrimary">#CD853F</color>
     <color name="colorPrimaryDark">#A0522D</color>
+    <color name="colorPrimaryDarkest">#8B4513</color>
     <color name="colorAccent">#FF4081</color>
     <color name="rustic">#F5DEB3</color>
     <color name="ligthBlue">#00BFFF</color>
     <color name="blue">#1E90FF</color>
     <color name="greyBlue">#6495ED</color>
     <color name="black">#000000</color>
+    <color name="white">#ffffff</color>
+    <color name="fireBrick">#B22222</color>
 </resources>

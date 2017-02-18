@@ -1,41 +1,39 @@
 package com.example.trjano.chupitos;
 
+import android.content.ContentValues;
+
+import com.example.trjano.chupitos.BD.Tablas;
+
 import java.util.ArrayList;
 
 /**
  * Created by trjano on 26/01/2017.
  */
-
 public class Chupito {
 
-
-
+    //El nombre del chupito
     String nombre;
 
-     ArrayList<String> ingredientes;
+    //La lista con el nombre de los ingredientes
+    ArrayList<String> ingredientes;
 
+    //Una descripción que quieras añadir al chupito
     String descripcion;
 
+    //El tipo de chupito que puede ser SUAVE,EXOTICO O DURO
     Tipo tipo;
 
 
-
-    public Chupito(){
-        nombre = "basico";
-        ingredientes = new ArrayList<String>();
-        ingredientes.add("Ingrediente basico \n");
-        tipo = Tipo.SUAVE;
-        descripcion = "Descripción básica";
-    }
-
-    public Chupito(String nombre,Tipo tipo, String descripcion, String ingrediente1){
+    public Chupito(String nombre,Tipo tipo,
+                   String descripcion, String ingrediente1){
         this.nombre = nombre;
         ingredientes = new ArrayList<String>();
         this.tipo = tipo;
         ingredientes.add(ingrediente1 +" \n");
         this.descripcion = descripcion;
     }
-    public Chupito(String nombre,Tipo tipo, String descripcion, String ingre1, String ingre2){
+    public Chupito(String nombre,Tipo tipo, String descripcion,
+                   String ingre1, String ingre2){
         this.nombre = nombre;
         ingredientes = new ArrayList<String>();
         this.tipo = tipo;
@@ -44,7 +42,8 @@ public class Chupito {
         this.descripcion = descripcion;
     }
 
-    public Chupito(String nombre,Tipo tipo, String descripcion, String ingre1, String ingre2, String ingre3) {
+    public Chupito(String nombre,Tipo tipo, String descripcion,
+                   String ingre1, String ingre2, String ingre3) {
         this.nombre = nombre;
         ingredientes = new ArrayList<String>();
         this.tipo = tipo;
@@ -73,6 +72,28 @@ public class Chupito {
 
     public Tipo getTipo() {
         return tipo;
+    }
+
+    /**
+     * Pasamos el chupito al tipo content values para prepararlo para la base de datos
+     * @return
+     */
+    public ContentValues toContentValues(){
+        ContentValues val = new ContentValues();
+        val.put(Tablas.TChupitos.NOMBRE,nombre);
+        val.put(Tablas.TChupitos.TIPO,tipo.toString());
+        val.put(Tablas.TChupitos.ING1,ingredientes.get(0));
+
+        if (ingredientes.size() >=2)
+            val.put(Tablas.TChupitos.ING2,ingredientes.get(1));
+
+        if (ingredientes.size() >=3)
+            val.put(Tablas.TChupitos.ING3,ingredientes.get(2));
+
+        val.put(Tablas.TChupitos.DESC,descripcion);
+        return val;
+
+
     }
 
     /**

@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">Chupitos</string>
-    <string name="Tipos">Tipos:</string>
     <string name="nombreChupito">Imagen_______Descripción</string>
     <string name="title_activity_chupito_inform">Info</string>
     <string name="title_activity_main2">Main2Activity</string>
