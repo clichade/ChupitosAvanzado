@@ -11,7 +11,7 @@ import com.example.trjano.chupitos.R;
  * Created by trjano on 24/01/2017.
  */
 
-public class Chupito_Activity extends AppCompatActivity  {
+public class Info_Activity extends AppCompatActivity  {
     ImageView ivPhoto;
     TextView tvIngredients;
     TextView tvDescription;
