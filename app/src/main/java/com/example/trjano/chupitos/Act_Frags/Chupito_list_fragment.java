@@ -75,7 +75,7 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
     public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
         Chupito chupito = listChupitos.get(position);
 
-        Intent intent = new Intent(getActivity(), Chupito_Activity.class);
+        Intent intent = new Intent(getActivity(), Info_Activity.class);
         Bundle b = new Bundle();
         b.putString("ingredientes", chupito.getIngredientes());
         b.putString("nombre", chupito.getNombre());

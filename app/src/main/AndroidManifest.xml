@@ -4,11 +4,11 @@
 
     <application
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@mipmap/background"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".Main_Activity">
+        <activity android:name=".Act_Frags.Main_Activity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -16,7 +16,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Act_Frags.Chupito_Activity"
+            android:name=".Act_Frags.Info_Activity"
             android:label="@string/title_activity_chupito_inform" />
         <activity android:name=".Act_Frags.Create_Activity" android:label="Añadir">
         </activity><!-- ATTENTION: This was auto-generated to add Google Play services to your project for

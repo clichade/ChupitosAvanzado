@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.trjano.chupitos.Act_Frags.Chupito_Activity;
 import com.example.trjano.chupitos.BD.ChupitosDB;
 import com.example.trjano.chupitos.BD.Tablas;
 import com.example.trjano.chupitos.Chupito;
@@ -69,7 +68,7 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
 
     @Override
     public void onClick(View v) {
-        Intent intent = new Intent(getActivity(),Chupito_Activity.class);
+        Intent intent = new Intent(getActivity(),Info_Activity.class);
         Bundle b = new Bundle();
         Chupito chupito = listC.get(0);
 

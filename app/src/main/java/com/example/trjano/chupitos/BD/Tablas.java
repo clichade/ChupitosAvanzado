@@ -8,6 +8,7 @@ import android.provider.BaseColumns;
 
 public class Tablas {
 
+    //esto contiene el nombre de las columnas de la tabla chupitos
     public static abstract class TChupitos implements BaseColumns {
         public static final String TABLE_NAME ="chupitos";
         public static final String NOMBRE = "nombre";

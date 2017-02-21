@@ -1,4 +1,4 @@
-package com.example.trjano.chupitos;
+package com.example.trjano.chupitos.Act_Frags;
 
 import android.support.design.widget.TabLayout;
 import android.support.v4.app.Fragment;
@@ -10,6 +10,7 @@ import android.os.Bundle;
 
 import com.example.trjano.chupitos.Act_Frags.Chupito_list_fragment;
 import com.example.trjano.chupitos.Act_Frags.Inicio_fragment;
+import com.example.trjano.chupitos.R;
 
 import java.util.ArrayList;
 import java.util.List;
