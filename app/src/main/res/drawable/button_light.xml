@@ -10,7 +10,7 @@
             android:bottomRightRadius="8dp"></corners>
         <solid android:color="@color/colorPrimaryDark"></solid>
         <stroke android:width="10dp"
-            android:color="@color/colorPrimaryDark"></stroke>
+            android:color="@color/colorPrimaryDarkest"></stroke>
 
 
     </shape>
