@@ -1,6 +1,5 @@
 package com.example.trjano.chupitos.BD;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -10,7 +9,6 @@ import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.Tipo;
 
 import java.util.ArrayList;
-
 
 
 /**
@@ -42,15 +40,40 @@ public class ChupitosDB extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
 
-        db.execSQL("CREATE TABLE " + Tablas.TChupitos.TABLE_NAME + " ("
-                + Tablas.TChupitos._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
-                + Tablas.TChupitos.NOMBRE + " TEXT NOT NULL,"
-                + Tablas.TChupitos.TIPO + " TEXT NOT NULL,"
-                + Tablas.TChupitos.ING1 + " TEXT NOT NULL,"
-                + Tablas.TChupitos.ING2 + " TEXT,"
-                + Tablas.TChupitos.ING3 + " TEXT,"
-                + Tablas.TChupitos.DESC + " TEXT,"
-                + "UNIQUE ("+ Tablas.TChupitos.NOMBRE+"));");
+        db.execSQL("CREATE TABLE " + T.Chupitos_Table.TABLE_NAME + " ("
+                + T.Chupitos_Table._ID + " INTEGER PRIMARY KEY AUTOINCREMENT,"
+                + T.Chupitos_Table.NOMBRE + " TEXT NOT NULL,"
+                + T.Chupitos_Table.TIPO + " TEXT NOT NULL,"
+                + T.Chupitos_Table.ING1 + " TEXT NOT NULL,"
+                + T.Chupitos_Table.ING2 + " TEXT,"
+                + T.Chupitos_Table.ING3 + " TEXT,"
+                + T.Chupitos_Table.ING4 + " TEXT,"
+                + T.Chupitos_Table.ING5 + " TEXT,"
+                + T.Chupitos_Table.DESC + " TEXT,"
+                + T.Chupitos_Table.FAV + " NUM NOT NULL DEFAULT 0,"
+                + "CHECK ("+T.Chupitos_Table.FAV+" IN (0,1)),"
+                + "UNIQUE ("+ T.Chupitos_Table.NOMBRE+"));");
+
+        ArrayList<String> ingList = new ArrayList<>();
+        ingList.add("Jagger");
+        ingList.add("Lima");
+        Chupito c =new Chupito("Jagger", Tipo.SUAVE,"Es jagger, mola al principio",ingList);
+        mockChupito(db,c);
+        ingList.clear();
+        ingList.add("Trópico");
+        ingList.add("Azul");
+        ingList.add("Magia");
+        c = new Chupito("Blue Tropic",Tipo.EXOTICO,"Me gusta el nombre en verdad",ingList);
+        mockChupito(db,c);
+        ingList.clear();
+        ingList.add("vamos");
+        ingList.add("A probar");
+        ingList.add("Con 5");
+        ingList.add("Putisimos");
+        ingList.add("Ingredientes");
+        c = new Chupito("5 Reyes",Tipo.DURO,"La verdad es que hay uno mas que en el dark souls",ingList);
+        mockChupito(db,c);
+
 
     }
 
@@ -73,8 +96,15 @@ public class ChupitosDB extends SQLiteOpenHelper {
      */
     public void clearTable(){
         SQLiteDatabase d = getWritableDatabase();
-        d.execSQL("DELETE FROM "+ Tablas.TChupitos.TABLE_NAME + ";");
+        d.execSQL("DELETE FROM "+ T.Chupitos_Table.TABLE_NAME + ";");
 
+    }
+
+    private long mockChupito(SQLiteDatabase db,Chupito chupito){
+        return db.insert(
+                T.Chupitos_Table.TABLE_NAME,
+                null,
+                chupito.toContentValues());
     }
 
 
@@ -87,7 +117,7 @@ public class ChupitosDB extends SQLiteOpenHelper {
         SQLiteDatabase sqLiteDatabase = getWritableDatabase();
 
         return sqLiteDatabase.insert(
-                Tablas.TChupitos.TABLE_NAME,
+                T.Chupitos_Table.TABLE_NAME,
                 null,
                 chupito.toContentValues());
     }
@@ -100,7 +130,7 @@ public class ChupitosDB extends SQLiteOpenHelper {
     public Cursor getAllChupitos() {
         return getReadableDatabase()
                 .query(
-                        Tablas.TChupitos.TABLE_NAME,
+                        T.Chupitos_Table.TABLE_NAME,
                         null,
                         null,
                         null,
@@ -118,9 +148,9 @@ public class ChupitosDB extends SQLiteOpenHelper {
     public Cursor getChupitoByName(String name) {
         //una query es una consulta sobre la base de datos legible y se pasa como un cursor
         Cursor c = getReadableDatabase().query(
-                Tablas.TChupitos.TABLE_NAME,
+                T.Chupitos_Table.TABLE_NAME,
                 null,
-                Tablas.TChupitos.NOMBRE + " LIKE ?",
+                T.Chupitos_Table.NOMBRE + " LIKE ?",
                 new String[]{name},
                 null,
                 null,
@@ -135,8 +165,8 @@ public class ChupitosDB extends SQLiteOpenHelper {
     public void removeChupitoByName(String name){
         //ejecutamos un código sql que elimina los chupitos con el mismo nombre de la base de datos
         SQLiteDatabase db = getWritableDatabase();//obtenemos la base de datos
-            db.execSQL("delete from "+ Tablas.TChupitos.TABLE_NAME+//ejecutamos el codigo sql
-                    " where "+ Tablas.TChupitos.NOMBRE + "='"+name+"'");
+            db.execSQL("delete from "+ T.Chupitos_Table.TABLE_NAME+//ejecutamos el codigo sql
+                    " where "+ T.Chupitos_Table.NOMBRE + "='"+name+"'");
 
     }
 

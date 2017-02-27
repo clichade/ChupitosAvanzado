@@ -1,36 +1,26 @@
 package com.example.trjano.chupitos.Act_Frags;
 
-import android.content.Context;
-import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.Spinner;
-import android.widget.Switch;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.trjano.chupitos.BD.ChupitosDB;
 import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.R;
 import com.example.trjano.chupitos.Tipo;
-import com.google.android.gms.appindexing.Action;
 import com.google.android.gms.appindexing.AppIndex;
-import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.InputStreamReader;
 import java.util.ArrayList;
 
 /**
@@ -40,8 +30,12 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
 
     Spinner spinner;
     Tipo tipoSelec;
-    EditText etNombre, etIng1, etIng2, etIng3 , etDesc;
+    ArrayList<EditText> etIngList;//lista de edit text de los ingredientes
+    ArrayList<LinearLayout>llIngList;
+    EditText etNombre, etDesc;
     Button btAnadir;
+
+    int n_ings;
     /**
      * ATTENTION: This was auto-generated to implement the App Indexing API.
      * See https://g.co/AppIndexing/AndroidStudio for more information.
@@ -53,13 +47,15 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_create);
 
+        n_ings = 1;
+
+        initializeLists();
         //inicializamos los edit text
         etNombre = (EditText) findViewById(R.id.etNombre);
-        etIng1 = (EditText) findViewById(R.id.etIng1);
-        etIng2 = (EditText) findViewById(R.id.etIng2);
-        etIng3 = (EditText) findViewById(R.id.etIng3);
-        etDesc = (EditText) findViewById(R.id.etDesc);
 
+
+
+        etDesc = (EditText) findViewById(R.id.etDesc);
         btAnadir = (Button) findViewById(R.id.btAdd);
 
         spinner = (Spinner) findViewById(R.id.spinner);//inicializamos el spinner
@@ -69,16 +65,34 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
         btAnadir.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(checkAddConditions()) {
+                if (checkAddConditions()) {
                     anadirChupito();
                 }
             }
         });
 
-
         // ATTENTION: This was auto-generated to implement the App Indexing API.
         // See https://g.co/AppIndexing/AndroidStudio for more information.
         client = new GoogleApiClient.Builder(this).addApi(AppIndex.API).build();
+    }
+
+    private void initializeLists(){
+        etIngList = new ArrayList<>();
+        llIngList = new ArrayList<>();
+
+        etIngList.add((EditText) findViewById(R.id.etIng1));
+        etIngList.add((EditText) findViewById(R.id.etIng2));
+        etIngList.add((EditText) findViewById(R.id.etIng3));
+        etIngList.add((EditText) findViewById(R.id.etIng4));
+        etIngList.add((EditText) findViewById(R.id.etIng5));
+
+        llIngList.add((LinearLayout) findViewById(R.id.ll_ing1));
+        llIngList.add((LinearLayout) findViewById(R.id.ll_ing2));
+        llIngList.add((LinearLayout) findViewById(R.id.ll_ing3));
+        llIngList.add((LinearLayout) findViewById(R.id.ll_ing4));
+        llIngList.add((LinearLayout) findViewById(R.id.ll_ing5));
+
+
     }
 
     /**
@@ -112,7 +126,7 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
         // On selecting a spinner item
         String s = parent.getItemAtPosition(position).toString();
         tipoSelec = Tipo.valueOf(s);
-        Toast.makeText(this,s,Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, s, Toast.LENGTH_SHORT).show();
     }
 
     //reaccina con el spinner
@@ -127,7 +141,7 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
         if (s.matches("")) {
             valid = false;
             Toast.makeText(this, "No se ha escrito ningún nombre", Toast.LENGTH_SHORT).show();
-        } else if (String.valueOf(etIng1.getText()) == "") {
+        } else if (String.valueOf(etIngList.get(0).getText()) == "") {
             valid = false;
             Toast.makeText(this, "No hay ningún primer ingrediente", Toast.LENGTH_SHORT).show();
         }
@@ -138,41 +152,67 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
     /**
      * añade un chupito cogiendo como parámetros el contenido de los edit text , si están vacios no se pone nada
      */
-    public void anadirChupito(){
+    public void anadirChupito() {
         String nombre = etNombre.getText().toString();
-        String ing1= etIng1.getText().toString();
-        String ing2= etIng2.getText().toString();
-        String ing3= etIng3.getText().toString();
+
         String desc = etDesc.getText().toString();
         Tipo tipo = tipoSelec;
-        Chupito c;
 
-        int n_ing = 1;
-        if(ing2 != "") {
-            n_ing++;
-            if (ing3 != "")
-                n_ing++;
+        ArrayList<String> ingredientes = new ArrayList<>();
+        boolean parar = false;
+        for (int i = 0; i < etIngList.size(); i++) {
+            ingredientes.add(etIngList.get(i).getText().toString());
         }
 
-       switch (n_ing){
-           case 1:
-               c = new Chupito(nombre,tipo,desc,ing1);
-               break;
-           case 2:
-               c = new Chupito(nombre,tipo,desc,ing1,ing2);
-               break;
-           case 3:
-           default:
-               c = new Chupito(nombre,tipo,desc,ing1,ing2,ing3);
-               break;
-       }
-
+        Chupito c = new Chupito(nombre, tipo, desc, ingredientes);
         ChupitosDB db = new ChupitosDB(getApplicationContext());
         db.saveChupito(c);
-        Toast.makeText(this, "Chupito creado con éxito", Toast.LENGTH_SHORT).show();
+        Toast.makeText(this, "Chupito "+nombre+" creado con éxito", Toast.LENGTH_SHORT).show();
         finish();
-
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_create, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    public void incIngr() {
+        if (n_ings < 5) {
+            llIngList.get(n_ings).setVisibility(View.VISIBLE);
+            n_ings++;
+        }
+    }
+
+    public void decIngr(){
+        if (n_ings >= 1){
+            llIngList.get(n_ings -1).setVisibility(View.INVISIBLE);
+            etIngList.get(n_ings -1).setText("");
+            n_ings--;
+    }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.m_anadir:
+                incIngr();
+                return true;
+
+            case R.id.m_quitar:
+                decIngr();
+                return true;
+
+            case R.id.m_limpiarInfo:
+                for (EditText t : etIngList)
+                    t.setText("");
+                return true;
+
+            default: return super.onOptionsItemSelected(item);
+        }
+
+    }
 }
+
+
 

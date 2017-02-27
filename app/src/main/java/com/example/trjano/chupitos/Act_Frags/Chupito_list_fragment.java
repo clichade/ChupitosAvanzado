@@ -13,7 +13,7 @@ import android.widget.Button;
 import android.widget.ListView;
 
 import com.example.trjano.chupitos.BD.ChupitosDB;
-import com.example.trjano.chupitos.BD.Tablas;
+import com.example.trjano.chupitos.BD.T;
 import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.Custom_Adapter;
 import com.example.trjano.chupitos.R;
@@ -35,7 +35,8 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
         return inflater.inflate(R.layout.activity_list, container, false);
 
     }
-//Como esto no es una activity sino un fragment lo que hacemos es poner getActivity()
+
+    //Como esto no es una activity sino un fragment lo que hacemos es poner getActivity()
     //en lugar de this
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
@@ -81,6 +82,7 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
         b.putString("nombre", chupito.getNombre());
         b.putString("descripcion", chupito.getDescripcion());
         b.putInt("ivIcon", chupito.getIcon());
+        b.putString("tipo", chupito.getTipo().toString());
 
 
         intent.putExtras(b);
@@ -89,27 +91,29 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
 
 
     public void cargarLista(ArrayList<Chupito> listChupitos) {
-
         ChupitosDB db = new ChupitosDB(getContext());
         Cursor c = db.getAllChupitos();
 
         while (c.moveToNext()) {
 
-            String name = c.getString(c.getColumnIndex(Tablas.TChupitos.NOMBRE));
-            String tipo = c.getString(c.getColumnIndex(Tablas.TChupitos.TIPO));
-            String desc = c.getString(c.getColumnIndex(Tablas.TChupitos.DESC));
-            String ing1 = c.getString(c.getColumnIndex(Tablas.TChupitos.ING1));
-            String ing2 = c.getString(c.getColumnIndex(Tablas.TChupitos.ING2));
-            if (ing2 == null)
-                listChupitos.add(new Chupito(name, Tipo.valueOf(tipo), desc, ing1));
-            else {
-                String ing3 = c.getString(c.getColumnIndex(Tablas.TChupitos.ING3));
-                if (ing3 == null)
-                    listChupitos.add(new Chupito(name, Tipo.valueOf(tipo), desc, ing1, ing2));
-                else
-                    listChupitos.add(new Chupito(name, Tipo.valueOf(tipo), desc, ing1, ing2, ing3));
+            String name = c.getString(c.getColumnIndex(T.Chupitos_Table.NOMBRE));//obtengo el nombre
+            String tipo = c.getString(c.getColumnIndex(T.Chupitos_Table.TIPO));//obtengo el tipo
+            String desc = c.getString(c.getColumnIndex(T.Chupitos_Table.DESC));//obtengo la descripcion
+
+            ArrayList<String> ingList = new ArrayList<>();
+            boolean endIng = false;
+            for (int i = 1; i <= 5 && !endIng; i++) {
+                String ing;
+                ing = c.getString(c.getColumnIndex("ingrediente" + i));
+                if (ing == null) {
+                    endIng = true;
+                } else
+                    ingList.add(ing);
             }
+
+            listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ingList));
         }
     }
 }
+
 

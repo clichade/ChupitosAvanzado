@@ -29,6 +29,14 @@
         android:startColor="@color/colorPrimary" />
     </shape>
 </item>
+    <item>
+        <shape>
+            <corners android:bottomLeftRadius="8dp"
+                android:bottomRightRadius="8dp"></corners>
+           <stroke android:color="@color/black"
+               android:width="2dp"></stroke>
+        </shape>
+    </item>
 
 </layer-list>
 

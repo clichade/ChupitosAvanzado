@@ -4,18 +4,19 @@
     android:id="@+id/activity_create_c"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingBottom="0dp"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context="com.example.trjano.chupitos.Act_Frags.Create_Activity"
-    android:background="@color/rustic">
+    android:background="@drawable/fondo">
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Nombre: "
-        android:textSize="30dp"
+        android:textSize="20dp"
+        android:background="@drawable/basic_gradient"
         android:textColor="@color/black"
         android:id="@+id/tvNombre"
        />
@@ -35,7 +36,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
         android:text="Tipo:"
-        android:textSize="30dp"
+        android:textSize="20dp"
+        android:background="@drawable/basic_gradient"
         android:textColor="@color/black"
         android:layout_below="@id/tvNombre"
         android:id="@+id/tvTipo"
@@ -57,111 +59,190 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="10dp"
         android:orientation="vertical"
         android:layout_below="@id/tvTipo"
-        android:padding="10dp">
+        android:padding="5dp">
 
 
        <LinearLayout
            android:layout_width="match_parent"
-           android:layout_height="40dp"
+           android:layout_height="wrap_content"
            android:weightSum="10"
            android:layout_marginBottom="10dp"
-           android:background="@color/colorPrimary">
+           android:orientation="vertical"
+           android:id="@+id/ll_ing1"
+           android:background="@drawable/ingredient_style">
 
            <TextView
                android:layout_width="match_parent"
                android:layout_height="wrap_content"
                android:layout_weight="8"
-               android:text="Ing1 :"
-               android:textSize="20dp"
+               android:text="Ingrediente 1"
+               android:textSize="15dp"
+               android:textStyle="bold"
+               android:layout_marginLeft="5dp"
                android:textColor="@color/black"
-               android:textAlignment="center"
-               android:layout_marginTop="10dp"
+
+               android:gravity="top"
+               android:layout_marginTop="5dp"
                android:id="@+id/tvIng1"/>
 
            <EditText
                android:layout_width="match_parent"
-               android:layout_height="match_parent"
+               android:layout_height="25dp"
                android:layout_weight="2"
                android:background="@drawable/edit_text_shadow"
-               android:id="@+id/etIng1"/>
+               android:layout_gravity="bottom"
+               android:layout_marginLeft="40dp"
+               android:id="@+id/etIng1"
+               />
        </LinearLayout>
 
 
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:weightSum="10"
+            android:visibility="invisible"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimary">
+            android:orientation="vertical"
+            android:id="@+id/ll_ing2"
+            android:background="@drawable/ingredient_style">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                android:text="Ing2 :"
-                android:textSize="20dp"
+                android:text="Ingrediente 2"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/black"
-                android:textAlignment="center"
-                android:layout_marginTop="10dp"
+
+                android:gravity="top"
+                android:layout_marginTop="5dp"
                 android:id="@+id/tvIng2"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="25dp"
                 android:layout_weight="2"
                 android:background="@drawable/edit_text_shadow"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="40dp"
                 android:id="@+id/etIng2"/>
-
-
-
-                />
-
         </LinearLayout>
-
-
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="40dp"
+            android:layout_height="wrap_content"
             android:weightSum="10"
+            android:visibility="invisible"
             android:layout_marginBottom="10dp"
-            android:background="@color/colorPrimary">
+            android:orientation="vertical"
+            android:id="@+id/ll_ing3"
+            android:background="@drawable/ingredient_style">
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="8"
-                android:text="Ing3 :"
-                android:textSize="20dp"
+                android:text="Ingrediente 3"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
                 android:textColor="@color/black"
-                android:textAlignment="center"
-                android:layout_marginTop="10dp"
+
+                android:gravity="top"
+                android:layout_marginTop="5dp"
                 android:id="@+id/tvIng3"/>
 
             <EditText
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="25dp"
                 android:layout_weight="2"
                 android:background="@drawable/edit_text_shadow"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="40dp"
                 android:id="@+id/etIng3"/>
-
         </LinearLayout>
 
-        <TextView
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Descripción"
-            android:textSize="20dp"
-            android:textAlignment="center"
-            android:textColor="@color/black"
-            android:textStyle="bold"/>
+            android:weightSum="10"
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:id="@+id/ll_ing4"
+            android:background="@drawable/ingredient_style">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="Ingrediente 4"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+
+                android:gravity="top"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvIng4"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="2"
+                android:background="@drawable/edit_text_shadow"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="40dp"
+                android:id="@+id/etIng4"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:weightSum="10"
+            android:layout_marginBottom="10dp"
+            android:visibility="invisible"
+            android:orientation="vertical"
+            android:id="@+id/ll_ing5"
+            android:background="@drawable/ingredient_style">
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="8"
+                android:text="Ingrediente 5"
+                android:textSize="15dp"
+                android:textStyle="bold"
+                android:layout_marginLeft="5dp"
+                android:textColor="@color/black"
+
+                android:gravity="top"
+                android:layout_marginTop="5dp"
+                android:id="@+id/tvIng5"/>
+
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="25dp"
+                android:layout_weight="2"
+                android:background="@drawable/edit_text_shadow"
+                android:layout_gravity="bottom"
+                android:layout_marginLeft="40dp"
+                android:id="@+id/etIng5"/>
+        </LinearLayout>
+
+
+
+
         <EditText
             android:layout_width="match_parent"
-            android:layout_height="140dp"
+            android:layout_height="60dp"
+            android:text="Descripción"
             android:background="@drawable/edit_text_shadow"
             android:gravity="top"
             android:id="@+id/etDesc"/>
@@ -170,7 +251,8 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:text="Añadir"
-            android:textSize="30dp"
+            android:textSize="40dp"
+            android:layout_gravity="top"
             android:layout_marginTop="10dp"
             android:textAlignment="center"
             android:id="@+id/btAdd"

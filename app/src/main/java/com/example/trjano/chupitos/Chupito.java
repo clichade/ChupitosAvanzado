@@ -2,12 +2,16 @@ package com.example.trjano.chupitos;
 
 import android.content.ContentValues;
 
-import com.example.trjano.chupitos.BD.Tablas;
+import com.example.trjano.chupitos.BD.T;
 
 import java.util.ArrayList;
 
 /**
  * Created by trjano on 26/01/2017.
+ */
+
+/**
+ * voy a meterle el Builder pattern para el problema de los ingredientes
  */
 public class Chupito {
 
@@ -25,33 +29,13 @@ public class Chupito {
 
 
     public Chupito(String nombre,Tipo tipo,
-                   String descripcion, String ingrediente1){
+                   String descripcion, ArrayList<String> ingredientes){
         this.nombre = nombre;
-        ingredientes = new ArrayList<String>();
+        this.ingredientes = ingredientes;
         this.tipo = tipo;
-        ingredientes.add(ingrediente1 +" \n");
-        this.descripcion = descripcion;
-    }
-    public Chupito(String nombre,Tipo tipo, String descripcion,
-                   String ingre1, String ingre2){
-        this.nombre = nombre;
-        ingredientes = new ArrayList<String>();
-        this.tipo = tipo;
-        ingredientes.add(ingre1 +" \n");
-        ingredientes.add(ingre2 +" \n");
         this.descripcion = descripcion;
     }
 
-    public Chupito(String nombre,Tipo tipo, String descripcion,
-                   String ingre1, String ingre2, String ingre3) {
-        this.nombre = nombre;
-        ingredientes = new ArrayList<String>();
-        this.tipo = tipo;
-        ingredientes.add(ingre1 + " \n");
-        ingredientes.add(ingre2 + " \n");
-        ingredientes.add(ingre3 + " \n");
-        this.descripcion = descripcion;
-    }
 
 
     public String getNombre() {
@@ -80,17 +64,23 @@ public class Chupito {
      */
     public ContentValues toContentValues(){
         ContentValues val = new ContentValues();
-        val.put(Tablas.TChupitos.NOMBRE,nombre);
-        val.put(Tablas.TChupitos.TIPO,tipo.toString());
-        val.put(Tablas.TChupitos.ING1,ingredientes.get(0));
+        val.put(T.Chupitos_Table.NOMBRE,nombre);
+        val.put(T.Chupitos_Table.TIPO,tipo.toString());
+        val.put(T.Chupitos_Table.ING1,ingredientes.get(0));
 
         if (ingredientes.size() >=2)
-            val.put(Tablas.TChupitos.ING2,ingredientes.get(1));
+            val.put(T.Chupitos_Table.ING2,ingredientes.get(1));
 
         if (ingredientes.size() >=3)
-            val.put(Tablas.TChupitos.ING3,ingredientes.get(2));
+            val.put(T.Chupitos_Table.ING3,ingredientes.get(2));
 
-        val.put(Tablas.TChupitos.DESC,descripcion);
+        if (ingredientes.size() >=4)
+            val.put(T.Chupitos_Table.ING4,ingredientes.get(3));
+
+        if (ingredientes.size() ==5)
+            val.put(T.Chupitos_Table.ING5,ingredientes.get(4));
+
+        val.put(T.Chupitos_Table.DESC,descripcion);
         return val;
 
 

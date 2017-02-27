@@ -12,7 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.trjano.chupitos.BD.ChupitosDB;
-import com.example.trjano.chupitos.BD.Tablas;
+import com.example.trjano.chupitos.BD.T;
 import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.R;
 import com.example.trjano.chupitos.Tipo;
@@ -110,27 +110,29 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
 
     }
 
-    public void cargarLista(ArrayList<Chupito> listChupitos){
+    public void cargarLista(ArrayList<Chupito> listChupitos) {
 
         ChupitosDB db = new ChupitosDB(getContext());
-        Cursor c =db.getAllChupitos();
+        Cursor c = db.getAllChupitos();
 
-        while (c.moveToNext()){
+        while (c.moveToNext()) {
 
-            String name = c.getString(c.getColumnIndex(Tablas.TChupitos.NOMBRE));
-            String tipo = c.getString(c.getColumnIndex(Tablas.TChupitos.TIPO));
-            String desc = c.getString(c.getColumnIndex(Tablas.TChupitos.DESC));
-            String ing1 = c.getString(c.getColumnIndex(Tablas.TChupitos.ING1));
-            String ing2 = c.getString(c.getColumnIndex(Tablas.TChupitos.ING2));
-            if (ing2 == null)
-                listChupitos.add(new Chupito(name, Tipo.valueOf(tipo),desc,ing1));
-            else {
-                String ing3 = c.getString(c.getColumnIndex(Tablas.TChupitos.ING3));
-                if (ing3 == null)
-                    listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ing1,ing2));
-                else
-                    listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ing1,ing2,ing3));
+            String name = c.getString(c.getColumnIndex(T.Chupitos_Table.NOMBRE));//obtengo el nombre
+            String tipo = c.getString(c.getColumnIndex(T.Chupitos_Table.TIPO));//obtengo el tipo
+            String desc = c.getString(c.getColumnIndex(T.Chupitos_Table.DESC));//obtengo la descripcion
+
+            ArrayList<String> ingList = new ArrayList<>();
+            boolean endIng = false;
+            for (int i = 1; i <= 3 && !endIng; i++) {
+                String ing;
+                ing = c.getString(c.getColumnIndex("ingrediente" + i));
+                if (ing == null) {
+                    endIng = true;
+                } else
+                    ingList.add(ing);
             }
+
+            listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ingList));
         }
     }
 }

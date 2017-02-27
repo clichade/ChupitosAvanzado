@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:background="@color/rustic"
+    android:background="@drawable/fondo"
     tools:context="com.example.trjano.chupitos.Act_Frags.Inicio_fragment">
     <LinearLayout
         android:layout_width="match_parent"

@@ -3,56 +3,88 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent"
+
     >
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"
+        android:background="@drawable/fondo"
         android:orientation="vertical"
-        android:background="@color/rustic">
+        >
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="tvNombre_Chupito"
             android:id="@+id/tvNombreChupito"
+            android:textAlignment="center"
             android:fontFamily="cursive"
-            android:textColor="#000"
-            android:textSize="30dp"
+            android:textColor="@color/black"
+            android:textSize="35dp"
             android:background="@drawable/basic_gradient"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:orientation="horizontal"
-            android:background="@drawable/shadow_layer"
+            android:background="@drawable/box_content_style"
+            android:layout_marginBottom="10dp"
             >
 
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
             <ImageView
-                android:layout_width="170dp"
-                android:layout_height="170dp"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
                 android:id="@+id/ivphoto"
                 android:src="@mipmap/chupito_basico"
                 />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:textSize="25dp"
+                    android:text="TIPO"
+                    android:textAlignment="center"
+                    android:id="@+id/tvTipoInfo"/>
+            </LinearLayout>
 
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:id="@+id/tvIngredients"
-                android:textColor="#000"
+                android:textColor="@color/black"
                 android:text="ingredientes"
-                android:textSize="20dp"/>
+                android:textSize="25dp"/>
 
         </LinearLayout>
 
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:background="@drawable/box_content_style"
+            android:padding="5dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Informacion : "
+            android:textSize="20dp"
+            android:background="@drawable/basic_gradient"
+            android:textColor="@color/black"/>
         <TextView
             android:layout_width="match_parent"
             android:layout_height="120dp"
             android:id="@+id/tvDescription"
-            android:textColor="#000"
+            android:textColor="@color/black"
             android:text="descripcion"
-            android:layout_marginTop="10dp"
+
             android:textSize="20dp"/>
+        </LinearLayout>
 
 
 

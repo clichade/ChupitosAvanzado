@@ -8,8 +8,7 @@ import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.example.trjano.chupitos.Act_Frags.Chupito_list_fragment;
-import com.example.trjano.chupitos.Act_Frags.Inicio_fragment;
+import com.example.trjano.chupitos.Cronometro_fragment;
 import com.example.trjano.chupitos.R;
 
 import java.util.ArrayList;
@@ -62,6 +61,7 @@ public class Main_Activity extends AppCompatActivity {
         //añadimos al adaptador los fragments que vamos a utilizar con el nombre delos taba
         adapter.addFragment(new Chupito_list_fragment(), "MENÚ");
         adapter.addFragment(new Inicio_fragment(),"INICIO");
+        adapter.addFragment(new Cronometro_fragment(),"CRONOMETRO");
         viewPager.setAdapter(adapter);
     }
 

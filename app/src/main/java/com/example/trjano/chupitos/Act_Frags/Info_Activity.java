@@ -24,6 +24,7 @@ public class Info_Activity extends AppCompatActivity  {
     TextView tvIngredients;
     TextView tvDescription;
     TextView tvNombreChupito;
+    TextView tvTipo;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -34,6 +35,7 @@ public class Info_Activity extends AppCompatActivity  {
         tvIngredients = (TextView) findViewById(R.id.tvIngredients);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvNombreChupito = (TextView) findViewById(R.id.tvNombreChupito);
+        tvTipo = (TextView) findViewById(R.id.tvTipoInfo);
 
         //recibimos los extras que serán ingredientes , descripción, nombre e ivIcon
         Bundle b = getIntent().getExtras();
@@ -45,6 +47,8 @@ public class Info_Activity extends AppCompatActivity  {
             aux = b.getString("nombre");
             tvNombreChupito.setText(aux);
             ivPhoto.setImageResource(b.getInt("ivIcon"));
+            aux = b.getString("tipo");
+            tvTipo.setText(aux);
         }
 
     }
