@@ -32,7 +32,7 @@ public class Info_Activity extends AppCompatActivity  {
 
         //cargamos las variables con las de la layout info
         ivPhoto = (ImageView) findViewById(R.id.ivphoto);
-        tvIngredients = (TextView) findViewById(R.id.tvIngredients);
+        tvIngredients = (TextView) findViewById(R.id.tvIngredient);
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvNombreChupito = (TextView) findViewById(R.id.tvNombreChupito);
         tvTipo = (TextView) findViewById(R.id.tvTipoInfo);
@@ -79,6 +79,7 @@ public class Info_Activity extends AppCompatActivity  {
                 call_Remove_dialog();
                 return true;
             case R.id.m_favoritos:
+
                 Toast.makeText(getApplicationContext(),"Favoritos pulsado",Toast.LENGTH_LONG).show();
                 return true;
 
@@ -87,6 +88,11 @@ public class Info_Activity extends AppCompatActivity  {
         }
     }
 
+
+    public void add_to_favorites(){
+        ChupitosDB bd = new ChupitosDB(getBaseContext());
+        bd.addToFavorites(tvNombreChupito.getText().toString());
+    }
     /**
      * creamos un diálogo de alerta por defecto y hacemos que al pulsar si  borramos el chupito actual
      * si no simplemente cancelarmos el remove dialog

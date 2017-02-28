@@ -28,6 +28,7 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
     Button btSuave; Button btExotico; Button btA_Matar;
     TextView tvTipos;
     ArrayList<Chupito> listC;
+    ChupitosDB bd ;
 
     /**
      * onCreateView forma parte del ciclo de vida de un fragment y es donde se debe declarar su layout
@@ -38,7 +39,8 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
      */
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
+                             @Nullable Bundle savedInstanceState) {
         return inflater.inflate(R.layout.inicio_view,container,false);
     }
 
@@ -51,7 +53,8 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
 
         listC = new ArrayList<>();
-        cargarLista(listC);
+        bd = new ChupitosDB(getContext());
+        bd.cargarLista(listC);
 
         btSuave = (Button) getActivity().findViewById(R.id.btSuave);
         btExotico = (Button) getActivity().findViewById(R.id.btExotico);
@@ -110,29 +113,5 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
 
     }
 
-    public void cargarLista(ArrayList<Chupito> listChupitos) {
 
-        ChupitosDB db = new ChupitosDB(getContext());
-        Cursor c = db.getAllChupitos();
-
-        while (c.moveToNext()) {
-
-            String name = c.getString(c.getColumnIndex(T.Chupitos_Table.NOMBRE));//obtengo el nombre
-            String tipo = c.getString(c.getColumnIndex(T.Chupitos_Table.TIPO));//obtengo el tipo
-            String desc = c.getString(c.getColumnIndex(T.Chupitos_Table.DESC));//obtengo la descripcion
-
-            ArrayList<String> ingList = new ArrayList<>();
-            boolean endIng = false;
-            for (int i = 1; i <= 3 && !endIng; i++) {
-                String ing;
-                ing = c.getString(c.getColumnIndex("ingrediente" + i));
-                if (ing == null) {
-                    endIng = true;
-                } else
-                    ingList.add(ing);
-            }
-
-            listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ingList));
-        }
-    }
 }

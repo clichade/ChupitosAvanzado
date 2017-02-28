@@ -170,4 +170,38 @@ public class ChupitosDB extends SQLiteOpenHelper {
 
     }
 
+    public void addToFavorites(String name){
+        SQLiteDatabase db = getWritableDatabase();//obtenemos la base de datos
+        db.execSQL("UPDATE "+ T.Chupitos_Table.TABLE_NAME+
+                " SET "+T.Chupitos_Table.FAV +" = 1"+//ejecutamos el codigo sql
+                " where "+ T.Chupitos_Table.NOMBRE + "='"+name+"'");
+
+    }
+
+    public void cargarLista(ArrayList<Chupito> listChupitos) {
+        Cursor c = getAllChupitos();
+
+        while (c.moveToNext()) {
+
+            String name = c.getString(c.getColumnIndex(T.Chupitos_Table.NOMBRE));//obtengo el nombre
+            String tipo = c.getString(c.getColumnIndex(T.Chupitos_Table.TIPO));//obtengo el tipo
+            String desc = c.getString(c.getColumnIndex(T.Chupitos_Table.DESC));//obtengo la descripcion
+
+            ArrayList<String> ingList = new ArrayList<>();
+            boolean endIng = false;
+            for (int i = 1; i <= 5 && !endIng; i++) {
+                String ing;
+                ing = c.getString(c.getColumnIndex("ingrediente" + i));
+                if (ing == null) {
+                    endIng = true;
+                } else
+                    ingList.add(ing);
+            }
+
+            listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ingList));
+        }
+    }
 }
+
+
+

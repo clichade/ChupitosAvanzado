@@ -27,6 +27,7 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
     ListView listView;
     Button btAnadir;
     Custom_Adapter adapter;
+    ChupitosDB bd;
 
     @Nullable
     @Override
@@ -42,9 +43,10 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
+        bd = new ChupitosDB(getContext());
         //inicializo la lista y los ocomponentes
         listChupitos = new ArrayList<>();
-        cargarLista(listChupitos);
+        bd.cargarLista(listChupitos);
         listView = (ListView) getActivity().findViewById(R.id.lvList_chupito);
         btAnadir = (Button) getActivity().findViewById(R.id.btAnadir);
 
@@ -67,7 +69,7 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
         super.onResume();
         //lo limpio, vuelvo a insertar
         adapter.clear();
-        cargarLista(listChupitos);
+        bd.cargarLista(listChupitos);
         adapter.notifyDataSetChanged();
     }
 
@@ -90,30 +92,6 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
     }
 
 
-    public void cargarLista(ArrayList<Chupito> listChupitos) {
-        ChupitosDB db = new ChupitosDB(getContext());
-        Cursor c = db.getAllChupitos();
-
-        while (c.moveToNext()) {
-
-            String name = c.getString(c.getColumnIndex(T.Chupitos_Table.NOMBRE));//obtengo el nombre
-            String tipo = c.getString(c.getColumnIndex(T.Chupitos_Table.TIPO));//obtengo el tipo
-            String desc = c.getString(c.getColumnIndex(T.Chupitos_Table.DESC));//obtengo la descripcion
-
-            ArrayList<String> ingList = new ArrayList<>();
-            boolean endIng = false;
-            for (int i = 1; i <= 5 && !endIng; i++) {
-                String ing;
-                ing = c.getString(c.getColumnIndex("ingrediente" + i));
-                if (ing == null) {
-                    endIng = true;
-                } else
-                    ingList.add(ing);
-            }
-
-            listChupitos.add(new Chupito(name,Tipo.valueOf(tipo),desc,ingList));
-        }
-    }
 }
 
 
