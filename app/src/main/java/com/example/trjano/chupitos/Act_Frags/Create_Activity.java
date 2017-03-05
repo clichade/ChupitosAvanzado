@@ -14,7 +14,7 @@ import android.widget.LinearLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.trjano.chupitos.BD.ChupitosDB;
+import com.example.trjano.chupitos.BD.BDatos;
 import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.R;
 import com.example.trjano.chupitos.Tipo;
@@ -165,7 +165,7 @@ public class Create_Activity extends AppCompatActivity implements AdapterView.On
         }
 
         Chupito c = new Chupito(nombre, tipo, desc, ingredientes);
-        ChupitosDB db = new ChupitosDB(getApplicationContext());
+        BDatos db = new BDatos(getApplicationContext());
         db.saveChupito(c);
         Toast.makeText(this, "Chupito "+nombre+" creado con éxito", Toast.LENGTH_SHORT).show();
         finish();

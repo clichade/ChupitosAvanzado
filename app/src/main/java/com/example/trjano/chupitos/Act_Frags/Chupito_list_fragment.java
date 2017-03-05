@@ -1,7 +1,6 @@
 package com.example.trjano.chupitos.Act_Frags;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -12,12 +11,10 @@ import android.widget.AdapterView;
 import android.widget.Button;
 import android.widget.ListView;
 
-import com.example.trjano.chupitos.BD.ChupitosDB;
-import com.example.trjano.chupitos.BD.T;
+import com.example.trjano.chupitos.BD.BDatos;
 import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.Custom_Adapter;
 import com.example.trjano.chupitos.R;
-import com.example.trjano.chupitos.Tipo;
 
 import java.util.ArrayList;
 
@@ -27,7 +24,7 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
     ListView listView;
     Button btAnadir;
     Custom_Adapter adapter;
-    ChupitosDB bd;
+    BDatos bd;
 
     @Nullable
     @Override
@@ -43,7 +40,7 @@ public class Chupito_list_fragment extends Fragment implements AdapterView.OnIte
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        bd = new ChupitosDB(getContext());
+        bd = new BDatos(getContext());
         //inicializo la lista y los ocomponentes
         listChupitos = new ArrayList<>();
         bd.cargarLista(listChupitos);

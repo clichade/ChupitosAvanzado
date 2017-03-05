@@ -1,5 +1,6 @@
 package com.example.trjano.chupitos.BD;
 
+import android.app.DownloadManager;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
@@ -15,7 +16,7 @@ import java.util.ArrayList;
  * SQliteOpenHelper es una clase que nos permite administrar una base de dtos de forma sencilla
  */
 
-public class ChupitosDB extends SQLiteOpenHelper {
+public class BDatos extends SQLiteOpenHelper {
 
     public static final int DATABASE_VERSION = 1;
     public static final String DATABASE_NAME = "chupitos.db";
@@ -24,7 +25,7 @@ public class ChupitosDB extends SQLiteOpenHelper {
      * el constructor compara con su versión anterior
      * @param context
      */
-    public ChupitosDB(Context context) {
+    public BDatos(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -170,12 +171,36 @@ public class ChupitosDB extends SQLiteOpenHelper {
 
     }
 
-    public void addToFavorites(String name){
+    public void addFavorite(String name){
         SQLiteDatabase db = getWritableDatabase();//obtenemos la base de datos
         db.execSQL("UPDATE "+ T.Chupitos_Table.TABLE_NAME+
                 " SET "+T.Chupitos_Table.FAV +" = 1"+//ejecutamos el codigo sql
                 " where "+ T.Chupitos_Table.NOMBRE + "='"+name+"'");
 
+    }
+
+    public void removeFavorite(String name){
+        SQLiteDatabase db = getWritableDatabase();//obtenemos la base de datos
+        db.execSQL("UPDATE "+ T.Chupitos_Table.TABLE_NAME+
+                " SET "+T.Chupitos_Table.FAV +" = 0"+//ejecutamos el codigo sql
+                " where "+ T.Chupitos_Table.NOMBRE + "='"+name+"'");
+
+    }
+
+    public boolean esFavorito(String name){
+
+            String[] args = new String[]{name, "1"};
+            Cursor cursor = getReadableDatabase()
+                    .query(
+                            T.Chupitos_Table.TABLE_NAME,
+                            null,
+                            T.Chupitos_Table.NOMBRE +"=? AND " +T.Chupitos_Table.FAV + "=?",
+                            args,
+                            null,
+                            null,
+                            null);
+
+        return cursor.moveToFirst();
     }
 
     public void cargarLista(ArrayList<Chupito> listChupitos) {

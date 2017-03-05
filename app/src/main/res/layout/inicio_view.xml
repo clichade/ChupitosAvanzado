@@ -12,9 +12,10 @@
     tools:context="com.example.trjano.chupitos.Act_Frags.Inicio_fragment">
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="wrap_content"
         android:orientation="vertical"
         android:padding="10dp"
+        android:background="@drawable/box_content_style"
         >
 
 
@@ -24,9 +25,10 @@
             android:textAlignment="center"
             android:id="@+id/tvTipos"
             android:textStyle="bold"
-            android:textColor="@color/colorPrimaryDark"
+            android:textColor="@color/black"
             android:textSize="50dp"
             android:text="Tipos:"
+            android:background="@color/colorPrimary"
             android:layout_marginBottom="10dp"/>
 
 
@@ -41,7 +43,7 @@
             android:background="@drawable/button_style"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="10dp"/>
 
 
 
@@ -55,7 +57,7 @@
             android:background="@drawable/button_style"
             android:textStyle="bold"
             android:textAlignment="center"
-            android:layout_marginBottom="20dp"/>
+            android:layout_marginBottom="10dp"/>
 
         <Button
             android:id="@+id/btA_Matar"
@@ -65,7 +67,7 @@
             android:text="A MATAR"
             android:textSize="70dp"
             android:fontFamily="cursive"
-            android:background="@drawable/aggresive_style"
+            android:background= "@drawable/button_red_light"
             android:textAlignment="center"/>
 
 

@@ -1,7 +1,6 @@
 package com.example.trjano.chupitos.Act_Frags;
 
 import android.content.Intent;
-import android.database.Cursor;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -11,11 +10,9 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.example.trjano.chupitos.BD.ChupitosDB;
-import com.example.trjano.chupitos.BD.T;
+import com.example.trjano.chupitos.BD.BDatos;
 import com.example.trjano.chupitos.Chupito;
 import com.example.trjano.chupitos.R;
-import com.example.trjano.chupitos.Tipo;
 
 import java.util.ArrayList;
 
@@ -28,7 +25,7 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
     Button btSuave; Button btExotico; Button btA_Matar;
     TextView tvTipos;
     ArrayList<Chupito> listC;
-    ChupitosDB bd ;
+    BDatos bd ;
 
     /**
      * onCreateView forma parte del ciclo de vida de un fragment y es donde se debe declarar su layout
@@ -53,7 +50,7 @@ public class Inicio_fragment extends Fragment implements View.OnClickListener{
         super.onActivityCreated(savedInstanceState);
 
         listC = new ArrayList<>();
-        bd = new ChupitosDB(getContext());
+        bd = new BDatos(getContext());
         bd.cargarLista(listC);
 
         btSuave = (Button) getActivity().findViewById(R.id.btSuave);

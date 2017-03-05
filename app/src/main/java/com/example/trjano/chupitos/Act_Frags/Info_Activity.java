@@ -2,7 +2,6 @@ package com.example.trjano.chupitos.Act_Frags;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
-import android.os.PersistableBundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
@@ -12,7 +11,7 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.trjano.chupitos.BD.ChupitosDB;
+import com.example.trjano.chupitos.BD.BDatos;
 import com.example.trjano.chupitos.R;
 
 /**
@@ -25,10 +24,13 @@ public class Info_Activity extends AppCompatActivity  {
     TextView tvDescription;
     TextView tvNombreChupito;
     TextView tvTipo;
+    MenuItem favoritos;
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.info_activity);
+
 
         //cargamos las variables con las de la layout info
         ivPhoto = (ImageView) findViewById(R.id.ivphoto);
@@ -36,6 +38,8 @@ public class Info_Activity extends AppCompatActivity  {
         tvDescription = (TextView) findViewById(R.id.tvDescription);
         tvNombreChupito = (TextView) findViewById(R.id.tvNombreChupito);
         tvTipo = (TextView) findViewById(R.id.tvTipoInfo);
+
+
 
         //recibimos los extras que serán ingredientes , descripción, nombre e ivIcon
         Bundle b = getIntent().getExtras();
@@ -62,6 +66,8 @@ public class Info_Activity extends AppCompatActivity  {
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
         inflater.inflate(R.menu.menu_info, menu);
+        favoritos = menu.findItem(R.id.m_favoritos);
+        empezar_favorito();
         return super.onCreateOptionsMenu(menu);
 
 
@@ -79,8 +85,7 @@ public class Info_Activity extends AppCompatActivity  {
                 call_Remove_dialog();
                 return true;
             case R.id.m_favoritos:
-
-                Toast.makeText(getApplicationContext(),"Favoritos pulsado",Toast.LENGTH_LONG).show();
+                cambiar_favoritos();
                 return true;
 
             default:
@@ -88,11 +93,33 @@ public class Info_Activity extends AppCompatActivity  {
         }
     }
 
+    private void empezar_favorito(){
+        BDatos bd = new BDatos(getBaseContext());
+        String nombre = tvNombreChupito.getText().toString();
 
-    public void add_to_favorites(){
-        ChupitosDB bd = new ChupitosDB(getBaseContext());
-        bd.addToFavorites(tvNombreChupito.getText().toString());
+        if(bd.esFavorito(nombre)){
+            favoritos.setIcon(R.drawable.ic_favorite_on);
+        }
+
     }
+    private void cambiar_favoritos(){
+        BDatos bd = new BDatos(getBaseContext());
+        String nombre = tvNombreChupito.getText().toString();
+
+        if(bd.esFavorito(nombre)){
+            favoritos.setIcon(R.drawable.ic_favorite);
+            bd.removeFavorite(nombre);
+            Toast.makeText(getApplicationContext(),"Se ha eliminado de favoritos",Toast.LENGTH_SHORT).show();
+        }
+        else {
+            favoritos.setIcon(R.drawable.ic_favorite_on);
+            bd.addFavorite(nombre);
+            Toast.makeText(getApplicationContext(),"Se ha añadido a  favoritos",Toast.LENGTH_SHORT).show();
+
+        }
+    }
+
+
     /**
      * creamos un diálogo de alerta por defecto y hacemos que al pulsar si  borramos el chupito actual
      * si no simplemente cancelarmos el remove dialog
@@ -110,7 +137,7 @@ public class Info_Activity extends AppCompatActivity  {
                 .setPositiveButton("Si",new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog,int id) {
                         //instanciamos la base de datos
-                        ChupitosDB bd = new ChupitosDB(getBaseContext());
+                        BDatos bd = new BDatos(getBaseContext());
                         //eliminamos los chupitos con ese nombre
                         bd.removeChupitoByName(tvNombreChupito.getText().toString());
                         Toast.makeText(getApplicationContext(),"Chupito borrado",Toast.LENGTH_LONG).show();
